@@ -23,17 +23,18 @@ public class AgentController : AgentMeta {
 		// Inicializamos los comportamientos.
 		ListBehaviours = new List<Behaviour>();
 
-		ListBehaviours.Add (new Standby ());
+		ListBehaviours.Add (new Standby (Player, this));
 		ListBehaviours.Add (new Seek(Player, this));
 		ListBehaviours.Add (new Flee (Player, this));
 		ListBehaviours.Add (new Arrive (Player, this, 5.0f, 1.0f, .1f));
+		ListBehaviours.Add (new Pursue (Player, this, 5.0f)); 
 
 		currentBehaviour = ListBehaviours [0];
 	
 	}
 
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 
 		SteeringOutput.SteeringOutput steering = new SteeringOutput.SteeringOutput ();
 

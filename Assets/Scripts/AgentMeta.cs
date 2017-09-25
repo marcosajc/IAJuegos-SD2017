@@ -38,7 +38,7 @@ public class AgentMeta : MonoBehaviour {
 
 	}
 
-	void Update(){
+	void FixedUpdate(){
 
 		// Determina la posición/orientación de acuerdo a la velocidad en el momento.
 		position += velocity * Time.deltaTime;
@@ -52,16 +52,8 @@ public class AgentMeta : MonoBehaviour {
 		orientation %= 360.0f;
 
 		// Si de acuerdo al calculo supero la máxima velocidad, normalizo a la máxima velocidad
-		if( velocity.sqrMagnitude > maxSpeed )
+		if( velocity.magnitude > maxSpeed )
 			velocity = velocity.normalized * maxSpeed;
-
-		// Idem. para aceleración lineal
-		if ( linear.sqrMagnitude > maxAcceleration )
-			linear = linear.normalized * maxAcceleration;
-
-		// Idem. para aceleración angular
-		if  (angular > maxAngularAcceleration )
-			angular = maxAngularAcceleration;
 
 		// Cálculo éstetico para suavizar el movimiento del facing del agente.
 		Vector2 dir = velocity;
@@ -89,12 +81,12 @@ public class AgentMeta : MonoBehaviour {
 
 	// Sets de las variables.
 
-//	public void setPosition( Vector2 newPosition ){
-//
-//		position = newPosition;
-//
-//	}
-//
+	public void setPosition( Vector2 newPosition ){
+
+		position = newPosition;
+
+	}
+
 //	public void setVelocity( Vector2 newVelocity ){
 //
 //		velocity = newVelocity;

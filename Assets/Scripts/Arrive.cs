@@ -14,7 +14,7 @@ public class Arrive : Behaviour {
 		SteeringOutput.SteeringOutput steering = new SteeringOutput.SteeringOutput( new Vector2( 0.0f, 0.0f), 0.0f );
 
 		Vector2 direction = Target.getPosition () - Character.getPosition ();
-		float distance = direction.sqrMagnitude;
+		float distance = direction.magnitude;
 
 		if (distance < targetRadius)
 			return steering;
@@ -28,10 +28,6 @@ public class Arrive : Behaviour {
 
 		steering.linear = targetVelocity - Character.getVelocity ();
 		steering.linear /= timeToTarget;
-	
-		MonoBehaviour.print (targetVelocity);
-		MonoBehaviour.print (timeToTarget);
-		MonoBehaviour.print (Character.getVelocity ());
 
 		steering.angular = 0.0f;
 		return steering;

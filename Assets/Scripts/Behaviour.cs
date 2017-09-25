@@ -41,9 +41,11 @@ public class Behaviour {
 
 	}
 
-	public Behaviour( string behaviourName, float MaxPrediction ){
+	public Behaviour( string behaviourName, AgentMeta target, AgentMeta character, float MaxPrediction ){
 
 		Name = behaviourName;
+		Target = target;
+		Character = character;
 		maxPrediction = MaxPrediction;
 
 	}

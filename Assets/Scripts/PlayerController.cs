@@ -15,7 +15,7 @@ public class PlayerController : AgentMeta {
 	}
 
 	//FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
-	void FixedUpdate()
+	void Update()
 	{
 		//Store the current horizontal input in the float moveHorizontal.
 		float moveHorizontal = Input.GetAxis ("Horizontal");
@@ -27,7 +27,7 @@ public class PlayerController : AgentMeta {
 		Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
 
 		//Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
-		this.linear = (movement * maxSpeed);
+		this.linear = (movement.normalized * maxAcceleration);
 
 		if ( Input.GetKeyDown("f") )
 			AgentCurrentBehaviour++;
@@ -37,10 +37,10 @@ public class PlayerController : AgentMeta {
 	// Renderización de frames para poder identificar la velocidad del objeto.
 	void LateUpdate(){
 
-		if (getVelocity ().sqrMagnitude < .5 * maxSpeed)
+		if (getVelocity ().magnitude < .5 * maxSpeed)
 			this.GetComponent<SpriteRenderer> ().sprite = shipSprite [3];
 
-		else if (getVelocity ().sqrMagnitude >= .5 * maxSpeed && getVelocity ().sqrMagnitude < maxSpeed)
+		else if (getVelocity ().magnitude >= .5 * maxSpeed && getVelocity ().magnitude < maxSpeed)
 			this.GetComponent<SpriteRenderer> ().sprite = shipSprite [1];
 
 		else

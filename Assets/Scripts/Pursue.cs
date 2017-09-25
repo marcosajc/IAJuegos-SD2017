@@ -6,14 +6,15 @@ using SteeringOutput;
 public class Pursue : Behaviour {
 
 	public Pursue () : base ("Pursue") {}
-	public Pursue ( float MaxPrediction ) : base ( "Pursue", MaxPrediction) {}
+	public Pursue ( AgentMeta target, AgentMeta character, float MaxPrediction ) 
+		: base ( "Pursue", target, character, MaxPrediction) {}
 
 	public override SteeringOutput.SteeringOutput getSteering(){
 
 		Vector2 direction = Target.getPosition () - Character.getPosition ();
-		float distance = direction.sqrMagnitude;
+		float distance = direction.magnitude;
 
-		float speed = Character.getVelocity ().sqrMagnitude;
+		float speed = Character.getVelocity ().magnitude;
 
 		float prediction;
 		if (speed <= distance / maxPrediction)
@@ -21,11 +22,15 @@ public class Pursue : Behaviour {
 		else
 			prediction = distance / maxPrediction;
 
-		AgentMeta dummy = new AgentMeta ( new Vector2( 0.0f, 0.0f) + Target.getVelocity() * prediction );
+		GameObject dummy = (GameObject) MonoBehaviour.Instantiate (Resources.Load ("Prefab/Dummy"));
+		AgentMeta dummyAgent = dummy.GetComponent<AgentMeta> ();
+		dummyAgent.setPosition (new Vector2 (0.0f, 0.0f) + Target.getVelocity () * prediction);
 
-		Behaviour seek = new Seek( dummy, Character);
+		Behaviour seek = new Seek( dummyAgent, Character);
+
 		SteeringOutput.SteeringOutput steering = seek.getSteering();
-		
+
+		MonoBehaviour.Destroy (dummy);		
 		return steering;
 
 	}
