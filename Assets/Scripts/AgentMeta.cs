@@ -60,6 +60,7 @@ public class AgentMeta : MonoBehaviour {
 		float angle = Mathf.Atan2(-dir.x, dir.y) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
+		orientation = transform.rotation.z;			
 		transform.position = position;
 
 	}

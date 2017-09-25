@@ -6,9 +6,12 @@ using SteeringOutput;
 public class Align : Behaviour {
 
 	public Align () : base ("Align") {}
-	public Align( AgentMeta target, AgentMeta character ) : base( "Align", target, character ) {}
+	public Align( AgentMeta target, AgentMeta character, float SlowRadius, float TargetRadius, float TimeToTarget) 
+		: base( "Align", target, character, SlowRadius, TargetRadius, TimeToTarget ) {}
 
 	public override SteeringOutput.SteeringOutput getSteering(){
+
+		Character.fullStop ();
 
 		SteeringOutput.SteeringOutput steering = new SteeringOutput.SteeringOutput( new Vector2( 0.0f, 0.0f), 0.0f );
 

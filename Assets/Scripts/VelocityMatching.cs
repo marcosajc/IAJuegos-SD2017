@@ -6,6 +6,7 @@ using SteeringOutput;
 public class VelocityMatching : Behaviour {
 
 	public VelocityMatching () : base ("Velocity Matching") {}
+	public VelocityMatching (AgentMeta target, AgentMeta character) : base ("Velocity Matching", target, character) {}
 
 	public override SteeringOutput.SteeringOutput getSteering(){
 

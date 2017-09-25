@@ -22,9 +22,6 @@ public class Pursue : Behaviour {
 		else
 			prediction = distance / maxPrediction;
 
-		MonoBehaviour.print (prediction);
-
-
 		GameObject dummy = (GameObject) MonoBehaviour.Instantiate (Resources.Load ("Prefab/Dummy"));
 		AgentMeta dummyAgent = dummy.GetComponent<AgentMeta> ();
 		dummyAgent.setPosition (Target.getPosition() + Target.getVelocity () * prediction);
