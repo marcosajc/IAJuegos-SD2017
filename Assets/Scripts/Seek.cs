@@ -17,6 +17,7 @@ public class Seek : Behaviour {
 		steering.linear = steering.linear.normalized * Character.maxAcceleration;
 
 		steering.angular = 0.0f;
+
 		return steering;
 
 	}

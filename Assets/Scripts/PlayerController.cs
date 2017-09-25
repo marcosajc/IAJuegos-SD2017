@@ -5,6 +5,15 @@ using UnityEngine.UI;
 
 public class PlayerController : AgentMeta {
 
+	private int AgentCurrentBehaviour;
+
+	void Awake(){
+
+		shipSprite = Resources.LoadAll<Sprite> ("Sprites/Spaceship");	// Cargamos las imagenes para ser usadas
+		AgentCurrentBehaviour = 0;
+
+	}
+
 	//FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
 	void FixedUpdate()
 	{
@@ -19,12 +28,14 @@ public class PlayerController : AgentMeta {
 
 		//Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
 		this.linear = (movement * maxSpeed);
+
+		if ( Input.GetKeyDown("f") )
+			AgentCurrentBehaviour++;
+		
 	}
 
 	// Renderización de frames para poder identificar la velocidad del objeto.
 	void LateUpdate(){
-
-		print (getVelocity ().sqrMagnitude);
 
 		if (getVelocity ().sqrMagnitude < .5 * maxSpeed)
 			this.GetComponent<SpriteRenderer> ().sprite = shipSprite [3];
@@ -34,6 +45,12 @@ public class PlayerController : AgentMeta {
 
 		else
 			this.GetComponent<SpriteRenderer> ().sprite = shipSprite [0];
+
+	}
+
+	public int getCurrentBehaviour(){
+
+		return AgentCurrentBehaviour;
 
 	}
 

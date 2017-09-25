@@ -10,13 +10,13 @@ public class Face : Behaviour {
 
 	public override SteeringOutput.SteeringOutput getSteering(){
 
-		SteeringOutput.SteeringOutput steering;
+		SteeringOutput.SteeringOutput steering = new SteeringOutput.SteeringOutput();
 
 		Vector2 direction = Target.getPosition () - Character.getPosition ();
 
-		if 
+		//if 
 
-		steering.linear = steering.linear.normalized * Character.maxAcceleration;
+		//steering.linear = steering.linear.normalized * Character.maxAcceleration;
 
 		steering.angular = 0.0f;
 		return steering;

@@ -28,12 +28,6 @@ public class AgentMeta : MonoBehaviour {
 
 	}
 
-	void Awake(){
-
-		shipSprite = Resources.LoadAll<Sprite> ("Sprites/Spaceship");	// Cargamos las imagenes para ser usadas
-
-	}
-
 	void Start(){
 
 		//character = GetComponent<GameObject> ();

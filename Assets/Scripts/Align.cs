@@ -6,7 +6,7 @@ using SteeringOutput;
 public class Align : Behaviour {
 
 	public Align () : base ("Align") {}
-	public Seek( AgentMeta target, AgentMeta character ) : base( "Align", target, character ) {}
+	public Align( AgentMeta target, AgentMeta character ) : base( "Align", target, character ) {}
 
 	public override SteeringOutput.SteeringOutput getSteering(){
 

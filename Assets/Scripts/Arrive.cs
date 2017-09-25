@@ -6,6 +6,8 @@ using SteeringOutput;
 public class Arrive : Behaviour {
 
 	public Arrive () : base ("Arrive") {}
+	public Arrive( AgentMeta target, AgentMeta character, float SlowRadius, float TargetRadius, float TimeToTarget) 
+		: base( "Arrive", target, character, SlowRadius, TargetRadius, TimeToTarget ) {}
 
 	public override SteeringOutput.SteeringOutput getSteering(){
 
@@ -27,6 +29,10 @@ public class Arrive : Behaviour {
 		steering.linear = targetVelocity - Character.getVelocity ();
 		steering.linear /= timeToTarget;
 	
+		MonoBehaviour.print (targetVelocity);
+		MonoBehaviour.print (timeToTarget);
+		MonoBehaviour.print (Character.getVelocity ());
+
 		steering.angular = 0.0f;
 		return steering;
 

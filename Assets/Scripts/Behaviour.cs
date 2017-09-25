@@ -35,6 +35,9 @@ public class Behaviour {
 		Name = behaviourName;
 		Target = target;
 		Character = character;
+		slowRadius = SlowRadius;
+		targetRadius = TargetRadius;
+		timeToTarget = TimeToTarget;
 
 	}
 
@@ -46,6 +49,8 @@ public class Behaviour {
 	}
 
 	public virtual SteeringOutput.SteeringOutput getSteering(){
+
+		Character.fullStop ();
 
 		return new SteeringOutput.SteeringOutput( new Vector2( 0.0f, 0.0f), 0.0f );
 
