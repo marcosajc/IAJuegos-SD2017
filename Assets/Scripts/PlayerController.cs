@@ -35,6 +35,10 @@ public class PlayerController : AgentMeta {
 			angular = maxAngularAcceleration;
 		if (Input.GetKeyDown ("e"))
 			angular = -maxAngularAcceleration;
+		if (Input.GetKeyDown ("z"))
+			stop ();
+		if (Input.GetKeyDown ("x"))
+			fullStop ();
 		
 	}
 

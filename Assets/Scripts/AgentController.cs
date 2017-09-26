@@ -29,7 +29,7 @@ public class AgentController : AgentMeta {
 //		ListBehaviours.Add (new Arrive (Player, this, 5.0f, 1.0f, .1f));
 //		ListBehaviours.Add (new Pursue (Player, this, 5.0f));
 //		ListBehaviours.Add (new VelocityMatching (Player, this));
-		ListBehaviours.Add (new Align (Player, this, Mathf.PI/10, Mathf.PI/100, .1f));
+		ListBehaviours.Add (new Align (Player, this, Mathf.PI/100, Mathf.PI/10000, .1f));
 
 		currentBehaviour = ListBehaviours [0];
 	

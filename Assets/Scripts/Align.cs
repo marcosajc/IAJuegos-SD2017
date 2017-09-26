@@ -11,8 +11,6 @@ public class Align : Behaviour {
 
 	public override SteeringOutput.SteeringOutput getSteering(){
 
-		Character.fullStop ();
-
 		SteeringOutput.SteeringOutput steering = new SteeringOutput.SteeringOutput( new Vector2( 0.0f, 0.0f), 0.0f );
 
 		float rotation = Character.getOrientation () - Target.getOrientation ();	// Podriamos utilizar Deg mejor ? (?)

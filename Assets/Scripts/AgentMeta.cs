@@ -55,6 +55,9 @@ public class AgentMeta : MonoBehaviour {
 		if( velocity.magnitude > maxSpeed )
 			velocity = velocity.normalized * maxSpeed;
 
+		if (rotation > maxRotation)
+			rotation = (rotation / Mathf.Abs (rotation)) * maxRotation;
+
 		// Cálculo éstetico para suavizar el movimiento del facing del agente.
 		// Vector2 dir = velocity;
 		// float angle = Mathf.Atan2(-dir.x, dir.y) * Mathf.Rad2Deg;
