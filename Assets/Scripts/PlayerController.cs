@@ -29,8 +29,12 @@ public class PlayerController : AgentMeta {
 		//Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
 		this.linear = (movement.normalized * maxAcceleration);
 
-		if ( Input.GetKeyDown("f") )
+		if (Input.GetKeyDown ("f"))
 			AgentCurrentBehaviour++;
+		if (Input.GetKeyDown ("q"))
+			angular = maxAngularAcceleration;
+		if (Input.GetKeyDown ("e"))
+			angular = -maxAngularAcceleration;
 		
 	}
 

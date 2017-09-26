@@ -56,11 +56,13 @@ public class AgentMeta : MonoBehaviour {
 			velocity = velocity.normalized * maxSpeed;
 
 		// Cálculo éstetico para suavizar el movimiento del facing del agente.
-		Vector2 dir = velocity;
-		float angle = Mathf.Atan2(-dir.x, dir.y) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+		// Vector2 dir = velocity;
+		// float angle = Mathf.Atan2(-dir.x, dir.y) * Mathf.Rad2Deg;
+		// transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-		orientation = transform.rotation.z;			
+		transform.rotation = Quaternion.AngleAxis(orientation, Vector3.forward);
+		//orientation = transform.rotation.z;
+
 		transform.position = position;
 
 	}
