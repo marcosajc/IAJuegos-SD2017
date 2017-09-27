@@ -20,14 +20,14 @@ public class AgentMeta : MonoBehaviour {
 	public float maxRotation;		// Máxima velocidad angular
 	public float maxAngularAcceleration;	// Máxima aceleración angular
 
-	public AgentMeta () {}
-
-	public AgentMeta ( Vector2 Position ) {
-
-		position = Position;
-
-	}
-
+//	public AgentMeta () {}
+//
+//	public AgentMeta ( Vector2 Position ) {
+//
+//		position = Position;
+//
+//	}
+//
 	void Start(){
 
 		//character = GetComponent<GameObject> ();

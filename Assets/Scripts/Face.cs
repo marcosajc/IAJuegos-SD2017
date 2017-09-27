@@ -15,11 +15,15 @@ public class Face : Behaviour {
 		{
 			return steering;
 		}
-		AgentMeta aux = new AgentMeta(Target.getPosition());
+
+		GameObject dummy = (GameObject) MonoBehaviour.Instantiate (Resources.Load ("Prefab/Dummy"));
+		AgentMeta aux = dummy.GetComponent<AgentMeta> ();
+		aux.setPosition (Target.getPosition ());
 		aux.setOrientation(Mathf.Atan2(-dir.x, dir.y) * Mathf.Rad2Deg);
 		Behaviour alinear = new Align (aux, Character, Mathf.PI/10, Mathf.PI/100, .1f);
 		//steering.linear = steering.linear.normalized * Character.maxAcceleration;
 		steering = alinear.getSteering();
+		MonoBehaviour.Destroy (dummy);
 		return steering;
 
 	}

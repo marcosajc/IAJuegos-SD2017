@@ -15,7 +15,7 @@ public class Wander : Behaviour {
 	public Wander ( AgentMeta character, float offset, float radius, float rate, float orientation ) 
 		: base ("Wander") {
 
-		Character = Character;
+		Character = character;
 		wanderOffset = offset;
 		wanderRadius = radius;
 		wanderRate = rate;
@@ -39,6 +39,7 @@ public class Wander : Behaviour {
 		GameObject dummy = (GameObject) MonoBehaviour.Instantiate (Resources.Load ("Prefab/Dummy"));
 		AgentMeta dummyAgent = dummy.GetComponent<AgentMeta> ();
 		dummyAgent.setPosition (target);
+		dummyAgent.setOrientation (wanderOrientation + Character.getOrientation());
 
 		Behaviour face = new Face (dummyAgent, Character);
 

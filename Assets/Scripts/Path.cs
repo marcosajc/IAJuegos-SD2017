@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Path {
 
-	private List<Vector2> Nodes;
+	public List<Vector2> Nodes;
 	private List<Vector2> pathDirections;
 	private List<float> accDistance;
 
@@ -14,6 +14,7 @@ public class Path {
 		Nodes = nodes;
 		pathDirections = new List<Vector2> ();
 		accDistance = new List<float> ();
+		BuildPath ();
 	}
 
 	private void BuildPath (){
@@ -26,16 +27,15 @@ public class Path {
 			pathVector = (Nodes [i + 1] - Nodes [i]);
 
 			currentSum += pathVector.magnitude;
-			accDistance[i] = currentSum;
+			accDistance.Add(currentSum);
 
-			pathDirections[i] = pathVector.normalized;
+			pathDirections.Add(pathVector.normalized);
 		}
 
 		for (int i = 0; i < Nodes.Count - 1; i++)
 			accDistance [i] = accDistance [i] / currentSum;
 
 		totalDistance = currentSum;
-
 
 	}
 
@@ -70,6 +70,8 @@ public class Path {
 		lastParam = Mathf.Clamp (lastParam, 0f, 1f);
 
 		int lastNode = BinarySearch (lastParam);
+		MonoBehaviour.print (pathDirections);
+		MonoBehaviour.print (lastNode);
 
 		float dist = Vector2.Dot (currentPosition - Nodes [lastNode], pathDirections [lastNode]);
 
@@ -80,14 +82,24 @@ public class Path {
 	}
 
 	public Vector2 getPosition( float param ){
-
+		/*
 		param = Mathf.Clamp (param, 0f, 1f);
 
 		int lastNode = BinarySearch (param);
 
 		float dist = totalDistance * (param - accDistance [lastNode]);
 
-		return pathDirections [lastNode] * dist + Nodes [lastNode]; 
+		return pathDirections [lastNode] * dist + Nodes [lastNode];
+		*/
+		param = Mathf.Clamp (param, 0f, 1f);
+
+		int lastNode = BinarySearch (param);
+
+		float dist = totalDistance * (param - accDistance [lastNode]);
+
+		return Nodes[lastNode];
+
+
 
 	}
 
