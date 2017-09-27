@@ -223,8 +223,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 1
   maxAcceleration: 0.75
-  maxRotation: 1
-  maxAngularAcceleration: 0.75
+  maxRotation: 45
+  maxAngularAcceleration: 12.5
 --- !u!212 &1680703467
 SpriteRenderer:
   m_ObjectHideFlags: 0

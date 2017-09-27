@@ -104,13 +104,13 @@ public class AgentMeta : MonoBehaviour {
 //		linear = newLinear;
 //
 //	}
-//
-//	public void setOrientation( float newOrientation ){
-//
-//		orientation = newOrientation;
-//
-//	}
-//
+
+	public void setOrientation( float newOrientation ){
+
+		orientation = newOrientation;
+
+	}
+
 //	public void setRotation( float newRotation ){
 //
 //		rotation = newRotation;

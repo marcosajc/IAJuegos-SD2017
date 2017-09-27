@@ -58,6 +58,13 @@ public class Behaviour {
 
 	}
 
+	// Random Binomial.
+	protected float randomBinomial(){
+
+		return Random.Range ( -1.0f, 1.0f);
+
+	}
+
 	// Set de las variables
 	public void setTarget( AgentMeta target ){
 
