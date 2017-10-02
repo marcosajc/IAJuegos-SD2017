@@ -14,6 +14,13 @@ namespace SteeringOutput
 			angular = Angular;
 
 		}
+
+		public static SteeringOutput operator +( SteeringOutput s1, SteeringOutput s2){
+
+			return new SteeringOutput (s1.linear + s2.linear, s1.angular + s2.angular);
+
+		}
+			
 	}
 }
 
