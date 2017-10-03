@@ -9,6 +9,9 @@ public class PrioritySteering : Behaviour {
 
 	public PrioritySteering ( List<BlendedSteering> Groups, float Epsilon) : base ( "Priority Steering" ) {
 
+		if (Groups.Count < 1)
+			return;
+
 		groups = Groups;
 		epsilon = Mathf.Abs(Epsilon);
 
@@ -16,7 +19,7 @@ public class PrioritySteering : Behaviour {
 
 	public override SteeringOutput.SteeringOutput getSteering ()
 	{
-		SteeringOutput.SteeringOutput steering;
+		SteeringOutput.SteeringOutput steering = new SteeringOutput.SteeringOutput( new Vector2(.0f, .0f), .0f);
 
 		for (int i = 0; i < groups.Count; i++) {
 
