@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class AgentMeta : MonoBehaviour {
 
 	protected Sprite[] shipSprite;	// Sprites de las naves para la presentación
-	protected BoundingBox collider;	// Collider de los agentes.
+	protected BoundingBox agentCollider;	// Collider de los agentes.
 
 	protected Vector2 position; 	// Posición del objeto.
 	protected float orientation; 	// Orientación del objeto.

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Forms {
 
+	private GameObject drawing;
+
 	protected Vector2 center;
 	protected float radius;
 
@@ -70,4 +72,41 @@ public class Forms {
 		countVertex = vertex.Count;
 
 	}
+
+	public void drawForm( Color color ){
+
+		if (drawing)
+			destroyFormDraw ();
+
+		drawing = new GameObject ();
+
+		drawing.transform.position = vertex [countVertex - 1];
+
+		drawing.AddComponent<LineRenderer> ();
+		LineRenderer line = drawing.GetComponent<LineRenderer> ();
+
+		line.startColor = color;
+		line.endColor = color;
+
+		line.startWidth = .1f;
+		line.endWidth = .1f;
+
+		line.SetPositions (listV2ToArrayV3());
+	}
+
+	public void destroyFormDraw(){
+		MonoBehaviour.Destroy (drawing);
+	}
+
+	private Vector3[] listV2ToArrayV3 () {
+
+		Vector3[] v3 = new Vector3[countVertex];
+
+		for (int i = 0; i < countVertex; i++)
+			v3 [i] = new Vector3 (vertex [i].x, vertex [i].y);
+
+		return v3;
+
+	}
+	
 }
