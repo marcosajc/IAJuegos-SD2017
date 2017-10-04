@@ -31,17 +31,18 @@ public class AgentController : AgentMeta {
 //		Nodes.Add (new Vector2 (0.0f, 0.0f));
 		ListBehaviours.Add (new Standby (Player, this));
 		//ListBehaviours.Add(new Separation ( this, targets, 1f, 0.2f ));
-		ListBehaviours.Add (new Seek(Player, this));
-		ListBehaviours.Add (new Flee (Player, this));
-		ListBehaviours.Add (new Arrive (Player, this, 5.0f, 1.0f, .1f));
-		ListBehaviours.Add (new Pursue (Player, this, 5.0f));
-		ListBehaviours.Add (new Evade (Player, this, 5.0f));
-		ListBehaviours.Add (new VelocityMatching (Player, this));
-		ListBehaviours.Add (new Align (Player, this, Mathf.PI/100, Mathf.PI/10000, .1f));
-		ListBehaviours.Add (new Wander (this, 0f, 1.0f, 10.0f, 0.0f));
-		ListBehaviours.Add (new Face (Player, this));
-		ListBehaviours.Add (new PathFollowing (this, Nodes, 10f));
-		ListBehaviours.Add (new PredictivePathFollowing (this, Nodes, 1f, 0.1f));
+//		ListBehaviours.Add (new Seek(Player, this));
+//		ListBehaviours.Add (new Flee (Player, this));
+//		ListBehaviours.Add (new Arrive (Player, this, 5.0f, 1.0f, .1f));
+//		ListBehaviours.Add (new Pursue (Player, this, 5.0f));
+//		ListBehaviours.Add (new Evade (Player, this, 5.0f));
+//		ListBehaviours.Add (new VelocityMatching (Player, this));
+//		ListBehaviours.Add (new Align (Player, this, Mathf.PI/100, Mathf.PI/10000, .1f));
+		ListBehaviours.Add (new Wander (this, .5f, .25f	, 1.0f, .0f));
+//		ListBehaviours.Add (new Face (Player, this));
+//		ListBehaviours.Add (new PathFollowing (this, Nodes, 10f));
+//		ListBehaviours.Add (new PredictivePathFollowing (this, Nodes, 1f, 0.1f));
+		ListBehaviours.Add (new SeekWhileLooking( Player, this));
 
 		currentBehaviour = ListBehaviours [0];
 	
@@ -54,7 +55,7 @@ public class AgentController : AgentMeta {
 
 		currentBehaviour = ListBehaviours [Player.getCurrentBehaviour () % ListBehaviours.Count];
 		print (currentBehaviour.getBehaviourName ());
-		print (this.position);
+		//print (this.position);
 		steering = currentBehaviour.getSteering ();
 
 		this.linear = steering.linear;

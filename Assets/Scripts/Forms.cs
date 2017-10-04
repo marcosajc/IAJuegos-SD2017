@@ -91,6 +91,7 @@ public class Forms {
 		line.startWidth = .1f;
 		line.endWidth = .1f;
 
+		Debug.Log(listV2ToArrayV3 ()); 
 		line.SetPositions (listV2ToArrayV3());
 	}
 

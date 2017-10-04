@@ -50,7 +50,7 @@ public class AgentMeta : MonoBehaviour {
 		rotation += angular * Time.deltaTime;
 
 		// Determino el angulo de la orientación.
-		orientation %= 360.0f;
+		orientation = mod(orientation,360.0f);
 
 		// Si de acuerdo al calculo supero la máxima velocidad, normalizo a la máxima velocidad
 		if( velocity.magnitude > maxSpeed )
@@ -108,7 +108,8 @@ public class AgentMeta : MonoBehaviour {
 
 	public void setOrientation( float newOrientation ){
 
-		orientation = newOrientation;
+		orientation = mod (newOrientation, 360.0f);
+		//transform.rotation = Quaternion.AngleAxis(orientation, Vector3.forward);
 
 	}
 
@@ -160,6 +161,10 @@ public class AgentMeta : MonoBehaviour {
 
 		return angular;
 
+	}
+
+	private float mod( float x, float m){
+		return (x % m + m) % m;
 	}
 		
 }

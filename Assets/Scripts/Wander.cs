@@ -26,26 +26,43 @@ public class Wander : Behaviour {
 	public override SteeringOutput.SteeringOutput getSteering ()
 	{
 		wanderOrientation += base.randomBinomial () * wanderRate;
+		//Debug.Log (wanderOrientation);
 
 		float targetOrientation = wanderOrientation + Character.getOrientation ();
 
 		float targetOrientationRadian = targetOrientation * Mathf.Deg2Rad;
 		float orientationRadian = Character.getOrientation () * Mathf.Deg2Rad;
+		//Debug.Log (targetOrientationRadian);
+		//Debug.Log (targetOrientation);
 
 		Vector2 target = Character.getPosition ()
-		                 + wanderOffset * new Vector2 (Mathf.Cos (orientationRadian), Mathf.Sin (orientationRadian))
-		                 + wanderRadius * new Vector2 (Mathf.Cos (targetOrientationRadian), Mathf.Sin (targetOrientationRadian));
+			+ wanderOffset * new Vector2 (Mathf.Cos (orientationRadian), Mathf.Sin (orientationRadian)).normalized
+			+ wanderRadius * new Vector2 (Mathf.Cos (targetOrientationRadian), Mathf.Sin (targetOrientationRadian)).normalized;
+		//Debug.Log (Mathf.Cos (180f * Mathf.Deg2Rad));
+		//Debug.Log(new Vector2 (Mathf.Cos (targetOrientationRadian), Mathf.Sin (targetOrientationRadian)));
+
+		//Debug.Log (target);
 
 		GameObject dummy = (GameObject) MonoBehaviour.Instantiate (Resources.Load ("Prefab/Dummy"));
 		AgentMeta dummyAgent = dummy.GetComponent<AgentMeta> ();
 		dummyAgent.setPosition (target);
 		dummyAgent.setOrientation (wanderOrientation + Character.getOrientation());
+		//dummyAgent.setOrientation ( 
 
-		Behaviour face = new Face (dummyAgent, Character);
+		//Debug.Log (dummyAgent.getPosition ()- Character.getPosition());
 
-		SteeringOutput.SteeringOutput steering = face.getSteering ();
+		//Behaviour face = new Face (dummyAgent, Character);
+		//Debug.Log (dummyAgent.getPosition () - Character.getPosition());
+		//Debug.Log (dummyAgent.getOrientation ());
+		//Debug.Log (Character.getOrientation ());
 
-		steering.linear = Character.maxAcceleration * new Vector2 (Mathf.Cos (orientationRadian), Mathf.Sin (orientationRadian));
+		Behaviour seek = new Seek (dummyAgent, Character);
+		Behaviour lwyg = new LWYG (Character);
+
+		SteeringOutput.SteeringOutput steering = seek.getSteering () + lwyg.getSteering();
+		Debug.Log (steering.angular);
+
+		//steering.linear = Character.maxAcceleration * new Vector2 (Mathf.Cos (orientationRadian), Mathf.Sin (orientationRadian));
 
 		MonoBehaviour.Destroy (dummy);
 		return steering;

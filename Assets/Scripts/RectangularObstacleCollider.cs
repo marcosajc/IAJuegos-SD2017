@@ -25,10 +25,16 @@ public class RectangularObstacleCollider : ObstacleColliders {
 
 		objCollider = new BoundingBox (vertex);
 
-		if (drawBox)
+		//if (drawBox) {
+			//Texture2D tx = Texture2D.blackTexture;
+			//tx.Resize (Mathf.RoundToInt (size.x), Mathf.RoundToInt (size.y));
+			//tx.Resize( 200, 200);
+			//Rect r1 = new Rect (vertex[0].x, vertex[0].y, width, height);
+			//GUI.Box (r1, tx);
+
 			//objCollider.drawForm (Color.green);
-			//GUI.Box( new Rect( vertex[0], new Vector2( width, height) ), );
-			GUI.DrawTexture( new Rect( vertex[0], new Vector2( width, height) ), new Texture());
+
+		//}
 
 	}
 

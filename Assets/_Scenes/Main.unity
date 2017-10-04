@@ -147,7 +147,33 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 120729594709287846, guid: df5362b709b94bb4a95601283f67609e,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 120729594709287846, guid: df5362b709b94bb4a95601283f67609e,
+        type: 2}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114323909745131654, guid: df5362b709b94bb4a95601283f67609e,
+        type: 2}
+      propertyPath: height
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114323909745131654, guid: df5362b709b94bb4a95601283f67609e,
+        type: 2}
+      propertyPath: width
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114323909745131654, guid: df5362b709b94bb4a95601283f67609e,
+        type: 2}
+      propertyPath: drawBox
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 120729594709287846, guid: df5362b709b94bb4a95601283f67609e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: df5362b709b94bb4a95601283f67609e, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &720386353
@@ -264,9 +290,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 1
-  maxAcceleration: 0.75
+  maxAcceleration: 0.5
   maxRotation: 45
-  maxAngularAcceleration: 12.5
+  maxAngularAcceleration: 10
 --- !u!212 &1680703467
 SpriteRenderer:
   m_ObjectHideFlags: 0
