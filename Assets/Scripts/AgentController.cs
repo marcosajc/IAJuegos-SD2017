@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AgentController : AgentMeta {
 
-	private List<Behaviour> ListBehaviours;
-	private Behaviour currentBehaviour;
+	public List<Behaviour> ListBehaviours;
+	public Behaviour currentBehaviour;
 	private PlayerController Player;
 
 	void Awake(){
@@ -42,7 +42,8 @@ public class AgentController : AgentMeta {
 //		ListBehaviours.Add (new Face (Player, this));
 //		ListBehaviours.Add (new PathFollowing (this, Nodes, 10f));
 //		ListBehaviours.Add (new PredictivePathFollowing (this, Nodes, 1f, 0.1f));
-		ListBehaviours.Add (new SeekWhileLooking( Player, this));
+//		ListBehaviours.Add (new SeekWhileLooking( Player, this));
+//		ListBehaviours.Add (new BlendedSteering( this, new List<Behaviour> { 
 
 		currentBehaviour = ListBehaviours [0];
 	

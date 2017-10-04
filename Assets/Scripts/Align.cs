@@ -10,28 +10,25 @@ public class Align : Behaviour {
 		: base( "Align", target, character, SlowRadius, TargetRadius, TimeToTarget ) {}
 
 	public override SteeringOutput.SteeringOutput getSteering(){
-
 		SteeringOutput.SteeringOutput steering = new SteeringOutput.SteeringOutput( new Vector2( 0.0f, 0.0f), 0.0f );
+		float rotation = Character.getOrientation () - Target.getOrientation ();	// Diferencia en las orientaciones
+		rotation *= Mathf.Deg2Rad - Mathf.PI;			// Mapping
 
-		float rotation = Character.getOrientation () - Target.getOrientation ();	// Podriamos utilizar Deg mejor ? (?)
-		rotation *= Mathf.Deg2Rad - Mathf.PI;
-
-		float rotationSize = Mathf.Abs (rotation);
-
-		if (rotationSize < targetRadius)
+		float rotationSize = Mathf.Abs (rotation);		// Diferencia en las orientaciones (Solo magnitud).
+		bool cond1 = rotationSize < targetRadius;
+		if (cond1) {			// Si la diferencia es muy pequenia, chao.
+			Character.setRotation(0f);
 			return steering;
-
-		float targetRotation = Character.maxRotation;
-
-		if (rotationSize <= slowRadius)
+		}
+		/* Calculo de aceleracion */
+		float targetRotation = Character.maxRotation;	// Velocidad de rotacion maxima. (Fuera del radio)
+		if (rotationSize <= slowRadius)					// Si estoy acercandome, disminuir aceleracion
 			targetRotation *= rotationSize / slowRadius;
-
+		
 		targetRotation *= rotation / rotationSize;
-
 		steering.angular = targetRotation - Character.getRotation ();
 		steering.angular /= timeToTarget;
 
-		steering.linear = new Vector2( 0.0f, 0.0f);
 		return steering;
 
 	}

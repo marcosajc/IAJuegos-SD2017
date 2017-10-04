@@ -10,15 +10,13 @@ public class Arrive : Behaviour {
 		: base( "Arrive", target, character, SlowRadius, TargetRadius, TimeToTarget ) {}
 
 	public override SteeringOutput.SteeringOutput getSteering(){
-
 		SteeringOutput.SteeringOutput steering = new SteeringOutput.SteeringOutput( new Vector2( 0.0f, 0.0f), 0.0f );
-
 		Vector2 direction = Target.getPosition () - Character.getPosition ();
 		float distance = direction.magnitude;
-
-		if (distance < targetRadius)
+		if (distance < targetRadius) {
+			steering.linear = -Character.getVelocity();
 			return steering;
-
+		}
 		var targetSpeed = Character.maxSpeed;
 
 		if (distance <= slowRadius)

@@ -56,10 +56,11 @@ public class Wander : Behaviour {
 		//Debug.Log (dummyAgent.getOrientation ());
 		//Debug.Log (Character.getOrientation ());
 
-		Behaviour seek = new Seek (dummyAgent, Character);
-		Behaviour lwyg = new LWYG (Character);
+		Behaviour seek = new SeekWhileLooking (dummyAgent, Character);
+		//Behaviour lwyg = new LWYG (Character);
 
-		SteeringOutput.SteeringOutput steering = seek.getSteering () + lwyg.getSteering();
+		//SteeringOutput.SteeringOutput steering = seek.getSteering () + lwyg.getSteering();
+		SteeringOutput.SteeringOutput steering = seek.getSteering();
 		Debug.Log (steering.angular);
 
 		//steering.linear = Character.maxAcceleration * new Vector2 (Mathf.Cos (orientationRadian), Mathf.Sin (orientationRadian));
