@@ -28,10 +28,9 @@ public class Separation : Behaviour {
 				steering.linear += strength * direction; 
 			} else 
 			{
-				Vector2 vel = Character.getVelocity ();
-				steering.linear = -vel;
+				//Vector2 vel = Character.getVelocity ();
+				steering.linear = -Character.maxAcceleration * direction.normalized;
 			}
-
 		}
 		return steering;
 	}

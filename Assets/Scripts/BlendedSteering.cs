@@ -22,6 +22,15 @@ public class BlendedSteering : Behaviour {
 
 	}
 
+	public BlendedSteering ( AgentMeta character, List<BehaviourAndWeight.BehaviourAndWeight> behaviourWeighted ) : base( "Blended Steering" ) {
+
+		if (behaviourWeighted.Count == 0)
+			return;
+
+		weightedBehaviours = behaviourWeighted;
+
+	}
+
 	public override SteeringOutput.SteeringOutput getSteering(){
 
 		SteeringOutput.SteeringOutput steering = new SteeringOutput.SteeringOutput (new Vector2 (.0f, .0f), .0f);
@@ -39,6 +48,9 @@ public class BlendedSteering : Behaviour {
 			steering += auxSteering;
 
 		}
+
+		Behaviour lwyg = new LWYG (Character);
+		steering += lwyg.getSteering ();
 
 		if (steering.linear.magnitude > Character.maxAcceleration)
 			steering.linear = steering.linear.normalized * Character.maxAcceleration;

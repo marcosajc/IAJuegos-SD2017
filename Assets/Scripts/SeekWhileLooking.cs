@@ -10,16 +10,10 @@ public class SeekWhileLooking : Behaviour {
 
 	public override SteeringOutput.SteeringOutput getSteering(){
 
-		SteeringOutput.SteeringOutput steering = new SteeringOutput.SteeringOutput();
-
-		steering.linear = Target.getPosition () - Character.getPosition ();
-
-		steering.linear = steering.linear.normalized * Character.maxAcceleration;
-
-		steering.angular = 0.0f;
+		Behaviour seek = new Seek (Target, Character);
 
 		Behaviour lwyg = new LWYG (Character);
-		steering += lwyg.getSteering ();
+		SteeringOutput.SteeringOutput steering = lwyg.getSteering () + seek.getSteering();
 
 		return steering;
 

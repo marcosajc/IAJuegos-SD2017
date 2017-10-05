@@ -49,14 +49,14 @@ public class AgentMeta : MonoBehaviour {
 		fullStop();
 	}
 
-	void OnGUI(){
-		Vector2 size = new Vector2 (Random.Range(20, 200), Random.Range(20, 200));
-		Vector2 center = new Vector2 (Random.Range(0,Screen.width), Random.Range(0,Screen.height)); 
-		Texture2D tx = Texture2D.blackTexture;
-		tx.Resize (Mathf.RoundToInt(size.x), Mathf.RoundToInt(size.y));
-		Rect r1 = new Rect (center.x, center.y, size.x, size.y);
-		GUI.Box (r1, tx);
-	}
+//	void OnGUI(){
+//		Vector2 size = new Vector2 (Random.Range(20, 200), Random.Range(20, 200));
+//		Vector2 center = new Vector2 (Random.Range(0,Screen.width), Random.Range(0,Screen.height)); 
+//		Texture2D tx = Texture2D.blackTexture;
+//		tx.Resize (Mathf.RoundToInt(size.x), Mathf.RoundToInt(size.y));
+//		Rect r1 = new Rect (center.x, center.y, size.x, size.y);
+//		GUI.Box (r1, tx);
+//	}
 
 	void FixedUpdate(){
 		linear.z = -0.98f;	// Gravedad
@@ -71,7 +71,8 @@ public class AgentMeta : MonoBehaviour {
 		velocity += linear * Time.deltaTime;
 		rotation += angular * Time.deltaTime;
 		// Determino el angulo de la orientación.
-		orientation = mod(orientation,360f);
+		//orientation = mod(orientation,360.0f);
+		orientation %= 360f;
 
 		// Si de acuerdo al calculo supero la máxima velocidad, normalizo a la máxima velocidad
 		if( velocity.magnitude > maxSpeed )
@@ -85,6 +86,9 @@ public class AgentMeta : MonoBehaviour {
 		transform.rotation = Quaternion.AngleAxis(orientation, Vector3.forward);
 		transform.position = position;
 		transform.localScale = new Vector3 (position.z + 1, position.z + 1);
+
+		velocity *= 0.9f;
+		rotation *= .9f;
 		/*
 		LineRenderer lineRenderer = GetComponent<LineRenderer> ();
 		Vector3[] linePositions = { position, position + velocity };
@@ -123,7 +127,8 @@ public class AgentMeta : MonoBehaviour {
 //	}
 
 	public void setOrientation( float newOrientation ){
-		orientation = mod (orientation, 360f);
+		//orientation = mod(newOrientation,360f);
+		orientation = newOrientation%360f;
 	}
 
 	public void setRotation( float newRotation ){

@@ -1,19 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class AgentController : AgentMeta {
 
 	public List<Behaviour> ListBehaviours;
 	public Behaviour currentBehaviour;
+	private GameObject[] surroundingAgents;
 	private PlayerController Player;
 
 	void Awake(){
 
 		shipSprite = Resources.LoadAll<Sprite> ("Sprites/Spaceship");	// Cargamos las imagenes para ser usadas
-		var player = GameObject.Find("Player");
+		GameObject player = GameObject.Find("Player");
+//		List<BehaviourAndWeight.BehaviourAndWeight> listWeighted;
 		
 		Player = player.GetComponent<PlayerController> ();
+		surroundingAgents = GameObject.FindGameObjectsWithTag ("Agents");
+		Debug.Log (surroundingAgents.Length);
+
+		for (int i = 0; i < surroundingAgents.Length; i++) {
+			if (surroundingAgents [i] == this.gameObject) {
+				surroundingAgents [i] = surroundingAgents [surroundingAgents.Length - 1];
+				//surroundingAgents[i] = player;
+			}
+		}
+
+		Array.Resize (ref surroundingAgents, surroundingAgents.Length - 1);
+		Debug.Log (surroundingAgents.Length);
+
+		AgentMeta[] agents = new AgentMeta[surroundingAgents.Length];
+
+		for (int i = 0; i < surroundingAgents.Length; i++)
+			agents [i] = surroundingAgents [i].GetComponent<AgentController> ();
 
 		maxSpeed = Player.maxSpeed;								
 		maxAcceleration = Player.maxAcceleration;				
@@ -24,26 +44,39 @@ public class AgentController : AgentMeta {
 		ListBehaviours = new List<Behaviour>();
 		AgentMeta[] targets = { Player };
 		var Nodes = new List<Vector2> ();
-		Nodes.Add (new Vector2 (-8.0f, 4.0f));
+		Nodes.Add (new Vector2 (-20.0f, 4.0f));
 		Nodes.Add (new Vector2 (0.0f, 4.0f));
 		Nodes.Add (new Vector2 (0.0f, 0.0f));
 //		Nodes.Add (new Vector2 (-3.0f, -2.0f));
 //		Nodes.Add (new Vector2 (0.0f, 0.0f));
 		ListBehaviours.Add (new Standby (Player, this));
-		//ListBehaviours.Add(new Separation ( this, targets, 1f, 0.2f ));
+		ListBehaviours.Add(new Separation ( this, agents, 2f, 10f ));
 //		ListBehaviours.Add (new Seek(Player, this));
 //		ListBehaviours.Add (new Flee (Player, this));
 //		ListBehaviours.Add (new Arrive (Player, this, 5.0f, 1.0f, .1f));
 //		ListBehaviours.Add (new Pursue (Player, this, 5.0f));
 //		ListBehaviours.Add (new Evade (Player, this, 5.0f));
 //		ListBehaviours.Add (new VelocityMatching (Player, this));
-//		ListBehaviours.Add (new Align (Player, this, Mathf.PI/100, Mathf.PI/10000, .1f));
-		ListBehaviours.Add (new Wander (this, .5f, .25f	, 1.0f, .0f));
+		ListBehaviours.Add (new Align (Player, this, Mathf.PI/100, Mathf.PI/10000, .1f));
+//		ListBehaviours.Add (new Wander (this, .5f, .25f	, 1.0f, .0f));
 //		ListBehaviours.Add (new Face (Player, this));
 //		ListBehaviours.Add (new PathFollowing (this, Nodes, 10f));
 //		ListBehaviours.Add (new PredictivePathFollowing (this, Nodes, 1f, 0.1f));
 //		ListBehaviours.Add (new SeekWhileLooking( Player, this));
-//		ListBehaviours.Add (new BlendedSteering( this, new List<Behaviour> { 
+//		ListBehaviours.Add (new ArriveWhileLooking (Player, this, 5f, 1f, .1f));
+		ListBehaviours.Add (new BlendedSteering (this, new List<Behaviour> { 
+			new SeekWhileLooking (Player, this), 
+			new Separation (this, agents, 2f, 10f) }, 
+			new List<float> { .1f, 1f }));
+
+		var randomSigned = UnityEngine.Random.Range (-1, 1);
+		if (randomSigned < 0)
+			Nodes.Reverse();
+		ListBehaviours.Add (new BlendedSteering (this, new List<Behaviour> {
+			new PathFollowing (this, Nodes, 10f),
+			new Separation (this, agents, 2f, 10f)
+		}, 
+			new List<float> { 1f, .5f }));
 
 		currentBehaviour = ListBehaviours [0];
 	
@@ -63,4 +96,5 @@ public class AgentController : AgentMeta {
 		this.angular = steering.angular;
 
 	}
+
 }

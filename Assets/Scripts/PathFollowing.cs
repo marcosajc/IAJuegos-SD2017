@@ -35,7 +35,7 @@ public class PathFollowing : Behaviour {
 		dummyAgent.setPosition (path.Nodes[i]);
 		//MonoBehaviour.print(dummyAgent.getPosition ());
 
-		Behaviour seek = new Arrive (dummyAgent, Character,1f,0.5f,0.1f);
+		Behaviour seek = new ArriveWhileLooking (dummyAgent, Character,1f,0.5f,0.1f);
 		SteeringOutput.SteeringOutput steering = seek.getSteering ();
 
 		MonoBehaviour.Destroy (dummy);
